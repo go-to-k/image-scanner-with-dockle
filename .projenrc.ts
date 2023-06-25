@@ -5,7 +5,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: '24818752+go-to-k@users.noreply.github.com',
   majorVersion: 1,
   minNodeVersion: '18.0.0',
-  cdkVersion: '2.85.0',
+  cdkVersion: '2.28.0',
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.0.0',
   name: 'image-scanner-with-dockle',
