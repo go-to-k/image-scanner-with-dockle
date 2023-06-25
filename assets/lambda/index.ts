@@ -1,10 +1,10 @@
 import { spawnSync } from 'child_process';
 import { CdkCustomResourceHandler, CdkCustomResourceResponse } from 'aws-lambda';
 
-export const handler: CdkCustomResourceHandler = async function (event) {
+export const handler: CdkCustomResourceHandler = async function (event, context) {
   const requestType = event.RequestType;
   const funcResponse: CdkCustomResourceResponse = {
-    PhysicalResourceId: 'ImageScannerWithDockle',
+    PhysicalResourceId: context.logStreamName,
     Data: {} as { [key: string]: string },
   };
 
