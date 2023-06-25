@@ -36,7 +36,7 @@ const image = new DockerImageAsset(this, 'DockerImage', {
 
 const imageScanner = new ImageScannerWithDockle(this, 'ImageScannerWithDockle', {
   imageUri: image.imageUri,
-  repository: image.repository,
+  repository: image.repository, // for grantPull to CustomResourceLambda
   ignore: ['CIS-DI-0009'], // See https://github.com/goodwithtech/dockle#checkpoint-summary
 });
 
@@ -167,9 +167,9 @@ const imageScannerWithDockleProps: ImageScannerWithDockleProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#image-scanner-with-dockle.ImageScannerWithDockleProps.property.imageUri">imageUri</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#image-scanner-with-dockle.ImageScannerWithDockleProps.property.repository">repository</a></code> | <code>aws-cdk-lib.aws_ecr.IRepository</code> | *No description.* |
-| <code><a href="#image-scanner-with-dockle.ImageScannerWithDockleProps.property.ignore">ignore</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#image-scanner-with-dockle.ImageScannerWithDockleProps.property.imageUri">imageUri</a></code> | <code>string</code> | Image URI for scan target. |
+| <code><a href="#image-scanner-with-dockle.ImageScannerWithDockleProps.property.repository">repository</a></code> | <code>aws-cdk-lib.aws_ecr.IRepository</code> | Repository including the image URI for scan target. |
+| <code><a href="#image-scanner-with-dockle.ImageScannerWithDockleProps.property.ignore">ignore</a></code> | <code>string[]</code> | Checkpoints as ignore rules. |
 
 ---
 
@@ -181,6 +181,8 @@ public readonly imageUri: string;
 
 - *Type:* string
 
+Image URI for scan target.
+
 ---
 
 ##### `repository`<sup>Required</sup> <a name="repository" id="image-scanner-with-dockle.ImageScannerWithDockleProps.property.repository"></a>
@@ -191,6 +193,10 @@ public readonly repository: IRepository;
 
 - *Type:* aws-cdk-lib.aws_ecr.IRepository
 
+Repository including the image URI for scan target.
+
+Because of grantPull to CustomResourceLambda.
+
 ---
 
 ##### `ignore`<sup>Optional</sup> <a name="ignore" id="image-scanner-with-dockle.ImageScannerWithDockleProps.property.ignore"></a>
@@ -200,6 +206,10 @@ public readonly ignore: string[];
 ```
 
 - *Type:* string[]
+
+Checkpoints as ignore rules.
+
+> [https://github.com/goodwithtech/dockle#checkpoint-summary](https://github.com/goodwithtech/dockle#checkpoint-summary)
 
 ---
 

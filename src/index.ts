@@ -12,21 +12,23 @@ import { Provider } from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
 
 export interface ImageScannerWithDockleProps {
-  /*
-    Image URI for scan target
-  */
+  /**
+   * Image URI for scan target.
+   */
   readonly imageUri: string;
 
-  /*
-    Repository including the image URI for scan target
-      - Because of grantPull to CustomResourceLambda
-  */
+  /**
+   * Repository including the image URI for scan target.
+   *
+   * Because of grantPull to CustomResourceLambda.
+   */
   readonly repository: IRepository;
 
-  /*
-    Ignore rule (Checkpoints)
-      - See https://github.com/goodwithtech/dockle#checkpoint-summary
-  */
+  /**
+   * Checkpoints as ignore rules.
+   *
+   * @see https://github.com/goodwithtech/dockle#checkpoint-summary
+   */
   readonly ignore?: string[];
 }
 

@@ -36,7 +36,7 @@ const image = new DockerImageAsset(this, 'DockerImage', {
 
 const imageScanner = new ImageScannerWithDockle(this, 'ImageScannerWithDockle', {
   imageUri: image.imageUri,
-  repository: image.repository,
+  repository: image.repository, // for grantPull to CustomResourceLambda
   ignore: ['CIS-DI-0009'], // See https://github.com/goodwithtech/dockle#checkpoint-summary
 });
 
