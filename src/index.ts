@@ -25,6 +25,7 @@ export class ImageScannerWithDockle extends Construct {
 
     const customResourceLambda = new SingletonFunction(this, 'CustomResourceLambda', {
       uuid: '662deedd-2d01-1bd0-45de-8d80b1bffe38',
+      lambdaPurpose: 'Custom::ImageScannerWithDockleCustomResourceLambda',
       runtime: Runtime.FROM_IMAGE,
       handler: Handler.FROM_IMAGE,
       code: AssetCode.fromAssetImage(join(__dirname, '../assets/lambda')),
