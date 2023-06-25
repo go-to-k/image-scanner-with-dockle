@@ -30,17 +30,18 @@ const image = new DockerImageAsset(this, 'DockerImage', {
   directory: resolve(__dirname, './'),
 });
 
-new ImageScannerWithDockle(this, 'ImageScannerWithDockle', {
+const imageScanner = new ImageScannerWithDockle(this, 'ImageScannerWithDockle', {
   imageUri: image.imageUri,
   repository: image.repository,
   ignore: ['CIS-DI-0009'], // See https://github.com/goodwithtech/dockle#checkpoint-summary
 });
 
-// If the vulnerability is detected by ImageScannerWithDockle, the following will not be executed, deployment will fail.
-new ECRDeployment(this, 'DeployImage', {
+// By adding addDependency, if the vulnerabilities are detected by ImageScannerWithDockle, the following ECRDeployment will not be executed, deployment will fail.
+const ecrDeployment = new ECRDeployment(this, 'DeployImage', {
   src: new DockerImageName(image.imageUri),
   dest: new DockerImageName(`${repository.repositoryUri}:latest`),
 });
+ecrDeployment.node.addDependency(imageScanner);
 ```
 
 # API Reference <a name="API Reference" id="api-reference"></a>
