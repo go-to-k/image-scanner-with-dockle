@@ -22,7 +22,7 @@ RUN \
 # ------------------------------------------------------------#
 # Run Layer
 # ------------------------------------------------------------#
-FROM public.ecr.aws/lambda/nodejs:18
+FROM public.ecr.aws/lambda/nodejs:18-arm64
 
 WORKDIR /
 
