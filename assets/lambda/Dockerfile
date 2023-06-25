@@ -1,7 +1,7 @@
 # ------------------------------------------------------------#
 # Dockle Install Layer
 # ------------------------------------------------------------#
-FROM alpine:3.18 AS dockle
+FROM arm64v8:3.18 AS dockle
 
 WORKDIR /
 
@@ -22,7 +22,7 @@ RUN \
 # ------------------------------------------------------------#
 # Run Layer
 # ------------------------------------------------------------#
-FROM public.ecr.aws/lambda/nodejs:18
+FROM public.ecr.aws/lambda/nodejs:18-arm64
 
 WORKDIR /
 
