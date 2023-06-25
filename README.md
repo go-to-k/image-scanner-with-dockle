@@ -10,7 +10,7 @@ This is an AWS CDK Construct that allows you to scan a container image during CD
 
 ## Usage
 
-```
+```sh
 npm install image-scanner-with-dockle
 ```
 
@@ -23,17 +23,16 @@ const repository = new Repository(this, 'ImageRepository', {
 });
 
 const image = new DockerImageAsset(this, 'DockerImage', {
-  directory: resolve(__dirname, '../assets/lambda'),
-  platform: Platform.LINUX_ARM64,
+  directory: resolve(__dirname, './'),
 });
 
 new ImageScannerWithDockle(this, 'ImageScannerWithDockle', {
   imageUri: image.imageUri,
   repository: image.repository,
-  ignore: ['CIS-DI-0009'], // see https://github.com/goodwithtech/dockle#checkpoint-summary
+  ignore: ['CIS-DI-0009'], // See https://github.com/goodwithtech/dockle#checkpoint-summary
 });
 
-// If the vulnerability is detected above, the following will not be executed
+// If the vulnerability is detected by ImageScannerWithDockle, the following will not be executed, deployment will fail.
 new ECRDeployment(this, 'DeployImage', {
   src: new DockerImageName(image.imageUri),
   dest: new DockerImageName(`${repository.repositoryUri}:latest`),
