@@ -2,7 +2,11 @@
 
 ## What is
 
-This is an AWS CDK Construct that allows you to scan a container image during CDK deployment layer with Dockle.
+This is an AWS CDK Construct that allows you to **scan a container image in CDK deployment layer with Dockle**.
+
+If it detects vulnerabilities, it can **prevent the image from being pushed to the ECR for the application**.
+
+Since it takes an `imageUri` for ECR as an argument, it can also be used to **simply scan an existing image in the repository**.
 
 ## Dockle
 
