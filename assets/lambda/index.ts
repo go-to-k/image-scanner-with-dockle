@@ -16,7 +16,7 @@ export const handler: CdkCustomResourceHandler = async function (event, context)
 
     const ignoreOptions = ignore.map((opt) => `-i ${opt}`).join(' ');
     const response = spawnSync(
-      `/opt/dockle --exit-code 1 --exit-level fatal ${ignoreOptions} ${imageUri}`,
+      `dockle --exit-code 1 --exit-level fatal ${ignoreOptions} ${imageUri}`,
       {
         shell: true,
       },

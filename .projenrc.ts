@@ -3,7 +3,8 @@ import { TrailingComma } from 'projen/lib/javascript';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'go-to-k',
   authorAddress: '24818752+go-to-k@users.noreply.github.com',
-  // majorVersion: 1,
+  majorVersion: 1,
+  minNodeVersion: '18.0.0',
   cdkVersion: '2.85.0',
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.0.0',
@@ -56,4 +57,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
 project.tsconfigDev.addInclude('assets/lambda/**/*.ts');
 project.setScript('integ:deploy', "npx cdk deploy --app='./lib/integ.js'");
 project.setScript('integ:destroy', "npx cdk destroy --app='./lib/integ.js'");
+project.projectBuild.compileTask.prependExec(
+  'yarn install --non-interactive --frozen-lockfile && yarn build',
+  {
+    cwd: 'assets/lambda',
+  },
+);
 project.synth();
