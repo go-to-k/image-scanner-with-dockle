@@ -11,7 +11,18 @@ const image = new DockerImageAsset(stack, 'DockerImage', {
   platform: Platform.LINUX_ARM64,
 });
 
-new ImageScannerWithDockle(stack, 'ImageScannerWithDockle', {
+new ImageScannerWithDockle(stack, 'ImageScannerWithDockle1', {
+  imageUri: image.imageUri,
+  repository: image.repository,
+});
+
+new ImageScannerWithDockle(stack, 'ImageScannerWithDockle2', {
+  imageUri: image.imageUri,
+  repository: image.repository,
+  ignore: [],
+});
+
+new ImageScannerWithDockle(stack, 'ImageScannerWithDockle3', {
   imageUri: image.imageUri,
   repository: image.repository,
   ignore: ['CIS-DI-0009'],

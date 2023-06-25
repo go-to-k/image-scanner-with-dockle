@@ -14,9 +14,13 @@ Since it takes an `imageUri` for ECR as an argument, it can also be used to **si
 
 ## Usage
 
+- Install
+
 ```sh
 npm install image-scanner-with-dockle
 ```
+
+- CDK Code
 
 ```ts
 import { ImageScannerWithDockle } from 'image-scanner-with-dockle';

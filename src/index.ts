@@ -40,6 +40,7 @@ export class ImageScannerWithDockle extends Construct {
     });
 
     const imageScannerProperties: { [key: string]: string | string[] } = {};
+    imageScannerProperties.addr = this.node.addr;
     imageScannerProperties.imageUri = imageUri;
     imageScannerProperties.ignore = ignore ?? [];
 

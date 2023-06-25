@@ -1,19 +1,20 @@
 import { spawnSync } from 'child_process';
 import { CdkCustomResourceHandler, CdkCustomResourceResponse } from 'aws-lambda';
 
-export const handler: CdkCustomResourceHandler = async function (event, context) {
+export const handler: CdkCustomResourceHandler = async function (event) {
   const requestType = event.RequestType;
+
+  const addr = event.ResourceProperties.addr as string;
+  const imageUri = event.ResourceProperties.imageUri as string;
+  const ignore = event.ResourceProperties.ignore as string[];
+  if (!addr || !imageUri) throw new Error('addr and imageUri are required.');
+
   const funcResponse: CdkCustomResourceResponse = {
-    PhysicalResourceId: context.logStreamName,
+    PhysicalResourceId: addr,
     Data: {} as { [key: string]: string },
   };
 
   if (requestType === 'Create' || requestType === 'Update') {
-    const imageUri = event.ResourceProperties.imageUri as string;
-    const ignore = event.ResourceProperties.ignore as string[];
-
-    if (!imageUri) throw new Error('imageUri is required.');
-
     const ignoreOptions = ignore.map((opt) => `-i ${opt}`).join(' ');
     const response = spawnSync(
       `dockle --exit-code 1 --exit-level fatal ${ignoreOptions} ${imageUri}`,
