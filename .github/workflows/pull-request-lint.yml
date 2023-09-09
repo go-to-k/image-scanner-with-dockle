@@ -25,5 +25,8 @@ jobs:
             feat
             fix
             chore
+            docs
+            test
+            ci
           requireScope: false
           githubBaseUrl: ${{ github.api_url }}
