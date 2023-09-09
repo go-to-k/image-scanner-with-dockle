@@ -27,6 +27,7 @@ jobs:
             chore
             docs
             test
+            refactor
             ci
           requireScope: false
           githubBaseUrl: ${{ github.api_url }}
