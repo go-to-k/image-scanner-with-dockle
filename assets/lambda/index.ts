@@ -1,29 +1,33 @@
 import { spawnSync } from 'child_process';
 import { CdkCustomResourceHandler, CdkCustomResourceResponse } from 'aws-lambda';
 
+interface ScannerProps {
+  addr: string;
+  imageUri: string;
+  ignore: string[];
+}
+
 export const handler: CdkCustomResourceHandler = async function (event) {
   const requestType = event.RequestType;
+  const props = event.ResourceProperties as unknown as ScannerProps;
 
-  const addr = event.ResourceProperties.addr as string;
-  const imageUri = event.ResourceProperties.imageUri as string;
-  const ignore = event.ResourceProperties.ignore as string[];
-  if (!addr || !imageUri) throw new Error('addr and imageUri are required.');
+  if (!props.addr || !props.imageUri) throw new Error('addr and imageUri are required.');
 
   const funcResponse: CdkCustomResourceResponse = {
-    PhysicalResourceId: addr,
+    PhysicalResourceId: props.addr,
     Data: {} as { [key: string]: string },
   };
 
   if (requestType === 'Create' || requestType === 'Update') {
-    const ignoreOptions = ignore.map((opt) => `-i ${opt}`).join(' ');
+    const ignoreOptions = props.ignore.map((opt) => `-i ${opt}`).join(' ');
     const response = spawnSync(
-      `/opt/dockle/dockle --exit-code 1 --exit-level fatal --no-color ${ignoreOptions} ${imageUri}`,
+      `/opt/dockle/dockle --exit-code 1 --exit-level fatal --no-color ${ignoreOptions} ${props.imageUri}`,
       {
         shell: true,
       },
     );
 
-    console.log('imageUri: ' + imageUri);
+    console.log('imageUri: ' + props.imageUri);
     console.log('stdout:\n' + response.stdout?.toString());
     console.log('stderr:\n' + response.stderr?.toString());
 
