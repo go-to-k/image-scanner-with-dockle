@@ -28,7 +28,6 @@ WORKDIR /
 
 COPY dist/index.js /var/task/index.js
 
-# Including LICENSE and README.md
-COPY --from=dockle /dockle /opt/dockle
+COPY --from=dockle /dockle/dockle /opt
 
 CMD ["index.handler"]
