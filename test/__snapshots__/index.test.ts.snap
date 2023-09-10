@@ -1,0 +1,274 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fine-grained Assertions Tests Snapshot test 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38E9B33FAD": {
+      "DependsOn": [
+        "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38ServiceRoleDefaultPolicyEE41ED61",
+        "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38ServiceRoleA0BDA71E",
+      ],
+      "Properties": {
+        "Architectures": [
+          "arm64",
+        ],
+        "Code": {
+          "ImageUri": {
+            "Fn::Sub": "registry.hub.docker.com/library/busybox",
+          },
+        },
+        "PackageType": "Image",
+        "Role": {
+          "Fn::GetAtt": [
+            "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38ServiceRoleA0BDA71E",
+            "Arn",
+          ],
+        },
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38EventInvokeConfigFF23ED62": {
+      "Properties": {
+        "FunctionName": {
+          "Ref": "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38E9B33FAD",
+        },
+        "MaximumRetryAttempts": 0,
+        "Qualifier": "$LATEST",
+      },
+      "Type": "AWS::Lambda::EventInvokeConfig",
+    },
+    "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38ServiceRoleA0BDA71E": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38ServiceRoleDefaultPolicyEE41ED61": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "ImageRepositoryBBCBC9DF",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "ecr:GetAuthorizationToken",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38ServiceRoleDefaultPolicyEE41ED61",
+        "Roles": [
+          {
+            "Ref": "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38ServiceRoleA0BDA71E",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ImageRepositoryBBCBC9DF": {
+      "DeletionPolicy": "Retain",
+      "Type": "AWS::ECR::Repository",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "ImageScannerWithDockle": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "ImageScannerWithDockleProviderframeworkonEvent5BEA967D",
+            "Arn",
+          ],
+        },
+        "addr": "c8ee6f5f731ae071f1be39c503be0c1f56a08237ff",
+        "ignore": [
+          "CIS-DI-0009",
+        ],
+        "imageUri": "imageUri",
+      },
+      "Type": "Custom::ImageScannerWithDockle",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "ImageScannerWithDockleProviderframeworkonEvent5BEA967D": {
+      "DependsOn": [
+        "ImageScannerWithDockleProviderframeworkonEventServiceRoleDefaultPolicy6F6DEDE5",
+        "ImageScannerWithDockleProviderframeworkonEventServiceRoleF44E92B5",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "HASH-REPLACED.zip",
+        },
+        "Description": "AWS CDK resource provider framework - onEvent (TestStack/ImageScannerWithDockle/Provider)",
+        "Environment": {
+          "Variables": {
+            "USER_ON_EVENT_FUNCTION_ARN": {
+              "Fn::GetAtt": [
+                "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38E9B33FAD",
+                "Arn",
+              ],
+            },
+          },
+        },
+        "Handler": "framework.onEvent",
+        "Role": {
+          "Fn::GetAtt": [
+            "ImageScannerWithDockleProviderframeworkonEventServiceRoleF44E92B5",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ImageScannerWithDockleProviderframeworkonEventServiceRoleDefaultPolicy6F6DEDE5": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38E9B33FAD",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "CustomImageScannerWithDockleCustomResourceLambda662deedd2d011bd045de8d80b1bffe38E9B33FAD",
+                          "Arn",
+                        ],
+                      },
+                      ":*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ImageScannerWithDockleProviderframeworkonEventServiceRoleDefaultPolicy6F6DEDE5",
+        "Roles": [
+          {
+            "Ref": "ImageScannerWithDockleProviderframeworkonEventServiceRoleF44E92B5",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ImageScannerWithDockleProviderframeworkonEventServiceRoleF44E92B5": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

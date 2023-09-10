@@ -20,6 +20,10 @@ const getTemplate = (): Template => {
 describe('Fine-grained Assertions Tests', () => {
   const template = getTemplate();
 
+  test('Snapshot test', () => {
+    expect(template.toJSON()).toMatchSnapshot();
+  });
+
   test('ImageScannerWithDockle created', () => {
     template.resourceCountIs('Custom::ImageScannerWithDockle', 1);
   });
