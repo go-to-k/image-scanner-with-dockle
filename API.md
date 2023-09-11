@@ -8,6 +8,8 @@ If it detects vulnerabilities, it can **prevent the image from being pushed to t
 
 Since it takes an `imageUri` for ECR as an argument, it can also be used to **simply scan an existing image in the repository**.
 
+For more information, please see [this blog](https://dev.to/aws-builders/container-image-scanning-with-dockle-in-aws-cdk-1bac).
+
 ## Dockle
 
 [Dockle](https://github.com/goodwithtech/dockle) is `Container Image Linter for Security, Helping build the Best-Practice Docker Image, Easy to start`.
