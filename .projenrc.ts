@@ -75,8 +75,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   // packageName: undefined,  /* The "name" in package.json. */
 });
 project.tsconfigDev.addInclude('assets/lambda/**/*.ts');
-project.setScript('integ:deploy', "npx cdk deploy --app='./lib/integ.js'");
-project.setScript('integ:destroy', "npx cdk destroy --app='./lib/integ.js'");
+project.setScript('integ:deploy', "npx cdk deploy --app='./test/integ.js'");
+project.setScript('integ:destroy', "npx cdk destroy --app='./test/integ.js'");
 project.projectBuild.compileTask.prependExec(
   'yarn install --non-interactive --frozen-lockfile && yarn build',
   {
