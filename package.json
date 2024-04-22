@@ -31,8 +31,8 @@
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
     "projen": "npx projen",
-    "integ:deploy": "npx cdk deploy --app='./lib/integ.js'",
-    "integ:destroy": "npx cdk destroy --app='./lib/integ.js'"
+    "integ:deploy": "npx cdk deploy --app='./test/integ.js'",
+    "integ:destroy": "npx cdk destroy --app='./test/integ.js'"
   },
   "author": {
     "name": "go-to-k",

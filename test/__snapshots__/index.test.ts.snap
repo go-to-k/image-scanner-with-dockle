@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Fine-grained Assertions Tests Snapshot test 1`] = `
+exports[`ImageScannerWithDockle Snapshot test 1`] = `
 {
   "Parameters": {
     "BootstrapVersion": {
@@ -116,7 +116,7 @@ exports[`Fine-grained Assertions Tests Snapshot test 1`] = `
       "Type": "AWS::ECR::Repository",
       "UpdateReplacePolicy": "Retain",
     },
-    "ImageScannerWithDockle": {
+    "ImageScannerWithDockle5522CF11": {
       "DeletionPolicy": "Delete",
       "Properties": {
         "ServiceToken": {

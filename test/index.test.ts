@@ -17,7 +17,7 @@ const getTemplate = (): Template => {
   return Template.fromStack(stack);
 };
 
-describe('Fine-grained Assertions Tests', () => {
+describe('ImageScannerWithDockle', () => {
   const template = getTemplate();
 
   test('Snapshot test', () => {
