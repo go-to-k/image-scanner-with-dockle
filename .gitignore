@@ -33,7 +33,6 @@ jspm_packages/
 *.js
 *.d.ts
 cdk.out/
-!/.projenrc.js
 /test-reports/
 junit.xml
 !/jest.config.json
@@ -47,7 +46,6 @@ junit.xml
 !/.github/pull_request_template.md
 !/.prettierignore
 !/.prettierrc.json
-!/.npmrc
 !/test/
 !/tsconfig.dev.json
 !/src/
@@ -57,3 +55,4 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
+!/.projenrc.ts
