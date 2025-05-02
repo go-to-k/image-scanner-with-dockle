@@ -59,9 +59,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'security',
   ],
   gitignore: ['*.js', '*.d.ts', 'cdk.out/'],
-  bin: {
-    '0': './assets',
-  },
   githubOptions: {
     pullRequestLintOptions: {
       semanticTitleOptions: {
@@ -69,6 +66,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
       },
     },
   },
+  workflowNodeVersion: '18.18.0',
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
