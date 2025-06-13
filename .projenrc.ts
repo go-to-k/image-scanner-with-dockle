@@ -3,11 +3,11 @@ import { TrailingComma, Transform } from 'projen/lib/javascript';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'go-to-k',
   authorAddress: '24818752+go-to-k@users.noreply.github.com',
-  majorVersion: 1,
+  majorVersion: 2,
   minNodeVersion: '18.0.0',
-  cdkVersion: '2.28.0',
+  cdkVersion: '2.178.1',
   defaultReleaseBranch: 'main',
-  jsiiVersion: '~5.0.0',
+  jsiiVersion: '~5.8.0',
   name: 'image-scanner-with-dockle',
   projenrcTs: true,
   repositoryUrl: 'https://github.com/go-to-k/image-scanner-with-dockle',
@@ -72,7 +72,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   // devDeps: [],             /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */
 });
-project.tsconfigDev.addInclude('assets/lambda/**/*.ts');
 project.setScript('integ:deploy', "npx cdk deploy --app='./test/integ.js'");
 project.setScript('integ:destroy', "npx cdk destroy --app='./test/integ.js'");
 project.projectBuild.compileTask.prependExec(
