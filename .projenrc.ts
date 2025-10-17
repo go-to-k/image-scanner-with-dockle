@@ -4,7 +4,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   author: 'go-to-k',
   authorAddress: '24818752+go-to-k@users.noreply.github.com',
   majorVersion: 2,
-  minNodeVersion: '18.0.0',
   cdkVersion: '2.178.1',
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.8.0',
@@ -66,7 +65,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
       },
     },
   },
-  workflowNodeVersion: '18.18.0',
+  workflowNodeVersion: '24',
+  npmTrustedPublishing: true,
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
